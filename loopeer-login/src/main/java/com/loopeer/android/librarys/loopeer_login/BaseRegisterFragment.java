@@ -50,15 +50,15 @@ public abstract class BaseRegisterFragment extends BaseCaptureFragment {
 
     protected abstract void requestRegister(String accountInput, String captureInput, String passwordInput);
 
-    private boolean verifyInput() {
+    protected boolean verifyInput() {
         return true;
     }
 
-    private String getPasswordInput() {
+    protected String getPasswordInput() {
         return mPasswordEditText.getText().toString();
     }
 
-    private String getCaptureInput() {
+    protected String getCaptureInput() {
         return mCaptureEditText.getText().toString();
     }
 

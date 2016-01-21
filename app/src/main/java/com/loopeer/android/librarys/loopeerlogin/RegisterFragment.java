@@ -16,4 +16,5 @@ public class RegisterFragment extends BaseRegisterFragment {
     public void requestCapture(String accountInput) {
 
     }
+
 }

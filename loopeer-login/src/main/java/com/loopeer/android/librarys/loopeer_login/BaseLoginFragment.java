@@ -72,7 +72,11 @@ public abstract class BaseLoginFragment extends BaseCaptureFragment {
 
     protected abstract void requestLogin(String accountInput, String passwordInput);
 
-    private boolean verifyInput() {
+    protected boolean verifyInput() {
+        return verifyAccountInput() && verifyPassworkInput();
+    }
+
+    protected boolean verifyPassworkInput() {
         return true;
     }
 
@@ -92,7 +96,7 @@ public abstract class BaseLoginFragment extends BaseCaptureFragment {
         mSendCaptureTextView = (TextView) getView().findViewById(R.id.txt_send_capture);
     }
 
-    private String getPasswordInput() {
+    protected String getPasswordInput() {
         return mPasswordEditText.getText().toString();
     }
 
