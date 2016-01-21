@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
 
-import com.loopeer.android.librarys.loopeer_login.LoginConfig;
+import com.loopeer.android.librarys.loopeer_login.LoginBundleBuilder;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -26,12 +26,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void openLogin(View view) {
         Intent intent = new Intent(this, LoginActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putBoolean(LoginConfig.THIRD_LOGIN_FLAG, mWechatCheckBox.isChecked() || mWeiboCheckBox.isChecked());
-        bundle.putBoolean(LoginConfig.WECHAT_LOGIN_FLAG, mWechatCheckBox.isChecked());
-        bundle.putBoolean(LoginConfig.WEIBO_LOGIN_FLAG, mWeiboCheckBox.isChecked());
-        bundle.putBoolean(LoginConfig.CAPTURE_LOGIN_FLAG, mCaptureCheckBox.isChecked());
-        intent.putExtras(bundle);
+        LoginBundleBuilder builder = new LoginBundleBuilder();
+        intent.putExtras(builder.isThirdLoginEnabled(mWechatCheckBox.isChecked() || mWeiboCheckBox.isChecked())
+                .isWechatLoginEnabled(mWechatCheckBox.isChecked()).isWeiboLoginEnabled(mWeiboCheckBox.isChecked())
+                .isCaptureLoginEnabled(mCaptureCheckBox.isChecked()).build());
         startActivity(intent);
     }
 
