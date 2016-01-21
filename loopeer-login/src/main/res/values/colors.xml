@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="windowBackground">#F3F3F3</color>
+
+    <color name="theme_primary">#009788</color>
+    <color name="theme_primary_dark">#009788</color>
+    <color name="theme_accent">#EAA600</color>
+
+    <color name="text_color_primary">#2B2B2B</color>
+    <color name="text_color_secondary">#727272</color>
+
+    <color name="divider_color">#DCDCDC</color>
+
+    <color name="button_pressed">#66009788</color>
+    <color name="button_disable">#CBCBCB</color>
+
+</resources>
