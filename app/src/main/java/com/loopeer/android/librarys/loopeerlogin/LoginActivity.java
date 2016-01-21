@@ -1,20 +1,20 @@
 package com.loopeer.android.librarys.loopeerlogin;
 
-import com.loopeer.android.librarys.loopeer_login.BaseLoginActivity;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 
 /**
- * Created by YanXin on 2016/1/20.
+ * Created by YanXin on 2016/1/21.
  */
-public class LoginActivity extends BaseLoginActivity {
+public class LoginActivity extends AppCompatActivity {
 
     @Override
-    protected void requestLogin(String accountInput, String passwordInput) {
-
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+        LoginFragment loginFragment = new LoginFragment();
+        loginFragment.setArguments(getIntent().getExtras());
+        getSupportFragmentManager().beginTransaction().add(R.id.frame_login, loginFragment).commit();
     }
-
-    @Override
-    public void requestCapture(String accountInput) {
-
-    }
-
 }

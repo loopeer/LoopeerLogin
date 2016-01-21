@@ -2,13 +2,15 @@ package com.loopeer.android.librarys.loopeer_login;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public abstract class BaseRegisterAcivity extends BaseCaptureActivity {
+public abstract class BaseRegisterFragment extends BaseCaptureFragment {
 
     private EditText mAccountEditText;
     private EditText mPasswordEditText;
@@ -18,19 +20,24 @@ public abstract class BaseRegisterAcivity extends BaseCaptureActivity {
 
     private ViewStub mCaptureViewStub;
 
+    @Nullable
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_register, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         initView();
+        super.onViewCreated(view, savedInstanceState);
     }
 
     private void initView() {
-        mAccountEditText = (EditText) findViewById(R.id.txt_account);
-        mPasswordEditText = (EditText) findViewById(R.id.txt_password);
-        mCaptureEditText = (EditText) findViewById(R.id.txt_capture);
+        mAccountEditText = (EditText) getView().findViewById(R.id.txt_account);
+        mPasswordEditText = (EditText) getView().findViewById(R.id.txt_password);
+        mCaptureEditText = (EditText) getView().findViewById(R.id.txt_capture);
         initCaptureView();
-        mOkButton = (Button) findViewById(R.id.btn_ok);
+        mOkButton = (Button) getView().findViewById(R.id.btn_ok);
         mOkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,9 +63,9 @@ public abstract class BaseRegisterAcivity extends BaseCaptureActivity {
     }
 
     private void initCaptureView() {
-        mCaptureViewStub = (ViewStub) findViewById(R.id.stub_capture);
+        mCaptureViewStub = (ViewStub) getView().findViewById(R.id.stub_capture);
         mCaptureViewStub.inflate();
-        mSendCaptureTextView = (TextView) findViewById(R.id.txt_send_capture);
+        mSendCaptureTextView = (TextView) getView().findViewById(R.id.txt_send_capture);
     }
 
     @Override

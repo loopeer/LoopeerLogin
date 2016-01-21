@@ -3,18 +3,18 @@ package com.loopeer.android.librarys.loopeer_login;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public abstract class BaseCaptureActivity extends AppCompatActivity {
+public abstract class BaseCaptureFragment extends Fragment {
 
     private CountDownTimer mDownTimer;
 
     @Override
-    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         if (getSendCaptureTextView() == null)
             return;
         getSendCaptureTextView().setOnClickListener(new View.OnClickListener() {
@@ -64,10 +64,9 @@ public abstract class BaseCaptureActivity extends AppCompatActivity {
     public abstract void requestCapture(String accountInput);
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
         if (mDownTimer != null)
             mDownTimer.cancel();
     }
-
 }

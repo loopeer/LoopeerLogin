@@ -2,14 +2,16 @@ package com.loopeer.android.librarys.loopeer_login;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public abstract class BaseLoginActivity extends BaseCaptureActivity {
+public abstract class BaseLoginFragment extends BaseCaptureFragment {
 
     LinearLayout mTopLayout;
     LinearLayout mBottomLayout;
@@ -24,28 +26,38 @@ public abstract class BaseLoginActivity extends BaseCaptureActivity {
     private LoginConfig mLoginConfig = new LoginConfig();
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
         parseIntentToLoginConfig();
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_login, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         initView();
+        super.onViewCreated(view, savedInstanceState);
         initInputHint();
     }
 
     private void parseIntentToLoginConfig() {
-        Bundle bundle = getIntent().getExtras();
+        Bundle bundle = getArguments();
         if (bundle == null)
             return;
         mLoginConfig = LoginConfig.unpack(bundle);
     }
 
     private void initView() {
-        mTopLayout = (LinearLayout) findViewById(R.id.layout_top);
-        mBottomViewStub = (ViewStub) findViewById(R.id.stub_bottom);
-        mAccountEditText = (EditText) findViewById(R.id.txt_account);
-        mPasswordEditText = (EditText) findViewById(R.id.txt_password);
-        mLoginButton = (Button) findViewById(R.id.btn_login);
-        mCaptureViewStub = (ViewStub) findViewById(R.id.stub_capture);
+        mTopLayout = (LinearLayout) getView().findViewById(R.id.layout_top);
+        mBottomViewStub = (ViewStub) getView().findViewById(R.id.stub_bottom);
+        mAccountEditText = (EditText) getView().findViewById(R.id.txt_account);
+        mPasswordEditText = (EditText) getView().findViewById(R.id.txt_password);
+        mLoginButton = (Button) getView().findViewById(R.id.btn_login);
+        mCaptureViewStub = (ViewStub) getView().findViewById(R.id.stub_capture);
         initLoginView();
         initCaptureLoginView();
         mLoginButton.setOnClickListener(new View.OnClickListener() {
@@ -77,7 +89,7 @@ public abstract class BaseLoginActivity extends BaseCaptureActivity {
         if (!mLoginConfig.isCaptureLoginEnabled())
             return;
         mCaptureViewStub.inflate();
-        mSendCaptureTextView = (TextView) findViewById(R.id.txt_send_capture);
+        mSendCaptureTextView = (TextView) getView().findViewById(R.id.txt_send_capture);
     }
 
     private String getPasswordInput() {
@@ -88,7 +100,7 @@ public abstract class BaseLoginActivity extends BaseCaptureActivity {
         if (!mLoginConfig.isThirdLoginEnabled())
             return;
         mBottomViewStub.inflate();
-        mBottomLayout = (LinearLayout) findViewById(R.id.layout_bottom);
+        mBottomLayout = (LinearLayout) getView().findViewById(R.id.layout_bottom);
         if (mLoginConfig.isWechatLoginEnabled())
             addLoginItemView("微信", R.drawable.ic_wechat_login);
         if (mLoginConfig.isWeiboLoginEnabled())
@@ -96,7 +108,7 @@ public abstract class BaseLoginActivity extends BaseCaptureActivity {
     }
 
     private void addLoginItemView(String title, int resId) {
-        LoginItemView loginItemView = new LoginItemView(this);
+        LoginItemView loginItemView = new LoginItemView(getActivity());
         loginItemView.setTitle(title);
         loginItemView.setIcon(resId);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT);

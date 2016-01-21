@@ -1,19 +1,19 @@
 package com.loopeer.android.librarys.loopeerlogin;
 
-import com.loopeer.android.librarys.loopeer_login.BaseRegisterAcivity;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 
 /**
- * Created by YanXin on 2016/1/20.
+ * Created by YanXin on 2016/1/21.
  */
-public class RegisterActivity extends BaseRegisterAcivity {
+public class RegisterActivity extends AppCompatActivity {
 
     @Override
-    protected void requestRegister(String accountInput, String captureInput, String passwordInput) {
-
-    }
-
-    @Override
-    public void requestCapture(String accountInput) {
-
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_register);
+        RegisterFragment fragment = new RegisterFragment();
+        getSupportFragmentManager().beginTransaction().add(R.id.frame_register, fragment).commit();
     }
 }
