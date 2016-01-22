@@ -12,7 +12,7 @@
         android:background="@color/divider_color" />
 
     <TextView
-        android:id="@+id/txt_send_capture"
+        android:id="@+id/txt_send_captcha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="12dp"

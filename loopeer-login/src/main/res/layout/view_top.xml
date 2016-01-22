@@ -34,7 +34,7 @@
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/txt_password"
+            android:id="@+id/txt_captcha"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -43,14 +43,24 @@
             android:textSize="14sp" />
 
         <ViewStub
-            android:id="@+id/stub_capture"
+            android:id="@+id/stub_captcha"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout="@layout/view_capture" />
+            android:layout="@layout/view_captcha" />
 
     </LinearLayout>
 
     <include layout="@layout/view_divider" />
+
+    <TextView
+        android:id="@+id/txt_forget_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_margin="16dp"
+        android:text="忘记密码？"
+        android:textColor="@color/text_color_secondary"
+        android:textSize="16sp" />
 
     <Button
         android:id="@+id/btn_login"

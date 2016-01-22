@@ -28,7 +28,7 @@
             android:text="微博登录" />
 
         <CheckBox
-            android:id="@+id/checkbox_capture"
+            android:id="@+id/checkbox_captcha"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"

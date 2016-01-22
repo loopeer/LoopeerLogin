@@ -25,8 +25,8 @@ public class LoginBundleBuilder {
         return this;
     }
 
-    public LoginBundleBuilder isCaptureLoginEnabled(boolean isEnabled) {
-        mLoginConfig.setCaptureLoginEnabled(isEnabled);
+    public LoginBundleBuilder isCaptchaLoginEnabled(boolean isEnabled) {
+        mLoginConfig.setCaptchaLoginEnabled(isEnabled);
         return this;
     }
 

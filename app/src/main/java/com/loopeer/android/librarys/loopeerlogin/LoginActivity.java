@@ -4,9 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-/**
- * Created by YanXin on 2016/1/21.
- */
 public class LoginActivity extends AppCompatActivity {
 
     @Override

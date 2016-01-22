@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
     private CheckBox mWechatCheckBox;
     private CheckBox mWeiboCheckBox;
-    private CheckBox mCaptureCheckBox;
+    private CheckBox mCaptchaCheckBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mWechatCheckBox = (CheckBox) findViewById(R.id.checkbox_wechat);
         mWeiboCheckBox = (CheckBox) findViewById(R.id.checkbox_weibo);
-        mCaptureCheckBox = (CheckBox) findViewById(R.id.checkbox_capture);
+        mCaptchaCheckBox = (CheckBox) findViewById(R.id.checkbox_captcha);
     }
 
     public void openLogin(View view) {
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         LoginBundleBuilder builder = new LoginBundleBuilder();
         intent.putExtras(builder.isThirdLoginEnabled(mWechatCheckBox.isChecked() || mWeiboCheckBox.isChecked())
                 .isWechatLoginEnabled(mWechatCheckBox.isChecked()).isWeiboLoginEnabled(mWeiboCheckBox.isChecked())
-                .isCaptureLoginEnabled(mCaptureCheckBox.isChecked()).build());
+                .isCaptchaLoginEnabled(mCaptchaCheckBox.isChecked()).build());
         startActivity(intent);
     }
 

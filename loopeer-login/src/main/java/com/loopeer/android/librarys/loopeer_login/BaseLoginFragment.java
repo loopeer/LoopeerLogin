@@ -11,19 +11,16 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public abstract class BaseLoginFragment extends BaseCaptureFragment {
+public abstract class BaseLoginFragment extends BaseCaptchaFragment {
 
     LinearLayout mTopLayout;
     LinearLayout mBottomLayout;
     EditText mAccountEditText;
     EditText mPasswordEditText;
     Button mLoginButton;
-    TextView mSendCaptureTextView;
+    TextView mForgetPasswordTextView;
 
     ViewStub mBottomViewStub;
-    ViewStub mCaptureViewStub;
-
-    private LoginConfig mLoginConfig = new LoginConfig();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,11 +52,10 @@ public abstract class BaseLoginFragment extends BaseCaptureFragment {
         mTopLayout = (LinearLayout) getView().findViewById(R.id.layout_top);
         mBottomViewStub = (ViewStub) getView().findViewById(R.id.stub_bottom);
         mAccountEditText = (EditText) getView().findViewById(R.id.txt_account);
-        mPasswordEditText = (EditText) getView().findViewById(R.id.txt_password);
+        mPasswordEditText = (EditText) getView().findViewById(R.id.txt_captcha);
         mLoginButton = (Button) getView().findViewById(R.id.btn_login);
-        mCaptureViewStub = (ViewStub) getView().findViewById(R.id.stub_capture);
+        mForgetPasswordTextView = (TextView) getView().findViewById(R.id.txt_forget_password);
         initLoginView();
-        initCaptureLoginView();
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,7 +64,15 @@ public abstract class BaseLoginFragment extends BaseCaptureFragment {
                 }
             }
         });
+        mForgetPasswordTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onForgetPasswordClicked();
+            }
+        });
     }
+
+    protected abstract void onForgetPasswordClicked();
 
     protected abstract void requestLogin(String accountInput, String passwordInput);
 
@@ -82,18 +86,11 @@ public abstract class BaseLoginFragment extends BaseCaptureFragment {
 
     protected void initInputHint() {
         mAccountEditText.setHint("请输入手机号/邮箱");
-        if (mLoginConfig.isCaptureLoginEnabled()) {
+        if (mLoginConfig.isCaptchaLoginEnabled()) {
             mPasswordEditText.setHint("请输入验证码");
         } else {
             mPasswordEditText.setHint("请输入密码");
         }
-    }
-
-    private void initCaptureLoginView() {
-        if (!mLoginConfig.isCaptureLoginEnabled())
-            return;
-        mCaptureViewStub.inflate();
-        mSendCaptureTextView = (TextView) getView().findViewById(R.id.txt_send_capture);
     }
 
     protected String getPasswordInput() {
@@ -118,11 +115,6 @@ public abstract class BaseLoginFragment extends BaseCaptureFragment {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT);
         params.weight = 1;
         mBottomLayout.addView(loginItemView, params);
-    }
-
-    @Override
-    public TextView getSendCaptureTextView() {
-        return mSendCaptureTextView;
     }
 
     @Override
